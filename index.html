@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <meta name="keywords" content="cvpr, tutorial, cvpr-2022, cvpr2022, computer vision, machine learning, generative learning, diffusion, denoising, denoising diffusion, score-based, score function">
+
+  <link rel="shortcut icon" href="./img/cvpr.png">
+
+
+
+  <title>Denoising Diffusion-based Generative Modeling: Foundations and Applications</title>
+  <meta name="description" content="Tutorial in Conjunction with CVPR 2022 ---">
+
+  <!--Open Graph Related Stuff-->
+  <meta property="og:title" content="Denoising Diffusion-based Generative Modeling: Foundations and Applications"/>
+  <meta property="og:url" content="https://nvlabs.github.io/eccv2020-limited-labels-data-tutorial/"/>           <!-- fix me  -->
+  <meta property="og:description" content="Tutorial in Conjunction with CVPR 2022"/>
+  <meta property="og:site_name" content="Denoising Diffusion-based Generative Modeling: Foundations and Applications"/>
+  <meta property="og:image" content="./img/thumbnail.png"/>
+  <meta property="og:image:url" content="./img/thumbnail.png"/>
+
+  <!--Twitter Card Stuff-->
+  <meta name="twitter:title" content="Denoising Diffusion-based Generative Modeling: Foundations and Applications"/>
+  <meta name="twitter:image" content="./img/thumbnail.png">
+  <meta name="twitter:url" content="https://nvlabs.github.io/eccv2020-limited-labels-data-tutorial/"/>           <!-- fix me  -->
+  <meta name="twitter:description" content="Tutorial in Conjunction with CVPR 2022 ---"/>
+
+  <!-- CSS  -->
+  <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="./css/main.css?1" media="screen,projection">
+
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/ff6e9b10da.js" crossorigin="anonymous"></script>
+</head>
+
+  <body>
+
+    <!-- <div class="top-strip"></div> -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/"></a>
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+    <div class="navbar-collapse collapse" id="navbar-main">
+      <ul class="nav navbar-nav">
+	<li><a href="#speakers">Speakers</a></li>
+        <li><a href="#talks">Schedule</a></li>
+        <li><a href="#organizers">About Us</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="page-content">
+          <p><br /></p>
+<div class="row">
+  <div class="col-xs-12">
+  <center><h2><b>CVPR 2022 Tutorial:</b></h2></center><br>
+    <center><h1>Denoising Diffusion-based Generative Modeling: <br> Foundations and Applications</h1></center>
+        <center><b>Dates</b>: Sunday June 19, 8:30 am - 12:00 pm (CDT)
+        <!--
+        <font color="#76b900"><b><a target="_blank" href="https://www.youtube.com/watch?v=n0p1zz0ZFiY">Live Session Recording</a></b></font></center> 
+        <center><b>Time slot 2</b>: <strike>Sunday 23 August, 6:30 am - 8:00 am (PDT)</strike>, <font color="#76b900"><b><a target="_blank" href="https://www.youtube.com/watch?v=mYD783Z-wb8">Live Session Recording</a></b></font></center>
+        <center>ECCV 2020 <font color="#76b900"> <b><a target="_blank" href="https://workshopsandtutorials.eccv2020.eu/papers/category/tutorial-sunday-aug-23/new-frontiers-for-learning-with-limited-labels-or-data/">Microsite</a></b></font>, Pre-recorded talks: Youtube <font color="#76b900"><b><a target="_blank" href="https://www.youtube.com/playlist?list=PLDEjP3Cd-gys9TC1RuboblGzwfsaJ9FxU">Playlist</a></b></font>, Bilibili <font color="#76b900"><b><a target="_blank" href="https://www.bilibili.com/read/cv7268682?share_source=copy_link&amp;share_medium=iphone&amp;bbid=Z34AB836729C35E84416ACBF44A761007D7D&amp;ts=1598042304">Playlist</a></b></font>
+        -->
+        </center>
+  </div>
+</div>
+
+<center>
+<br>
+<a>
+    <img width="300px" src="./img/CVPR2022.png" />
+</a>
+<br>
+<a>
+    <img src="./img/diffusion.png" />
+</a>
+</center>
+
+<br/>
+<h2>Overview</h2>
+<br/>
+<p>
+  Denoising diffusion models, also known as score-based generative models, have recently emerged as a powerful class of generative models. They demonstrate astonishing results in high-fidelity image generation, often even outperforming generative adversarial networks. Importantly, they additionally offer strong sample diversity and faithful mode coverage of the learnt data distribution. This implies that denoising diffusion models are well suited for learning models of complex and diverse data. Denoising diffusion models define a forward diffusion process that maps data to noise by gradually perturbing the input data. Data generation is achieved using a learnt, parametrized reverse process that performs iterative denoising, starting from pure random noise (see figure above). Although diffusion models are relatively new, they have already found many successful applications. For instance, they have been used in computer vision for image editing, controllable, semantic, and text-driven image synthesis, image-to-image translation, superresolution, image segmentation, as well as 3D shape generation and completion.
+</p>
+<p>
+  In this tutorial, we recapitulate the foundations of denoising diffusion models, including both their discrete-step formulation as well as their differential equation-based description. We also discuss practical implementation details relevant for practitioners and highlight connections to other, existing generative models, thereby putting denoising diffusion models into a broader context. Moreover, we review recent technical extensions and advanced methods for accelerated sampling. Slow sampling has been the main weakness of denoising diffusion models. However, recently many promising techniques to overcome this challenge have emerged. To demonstrate how denoising diffusion models can be tailored to vision use cases, we also review successful applications in computer vision.
+</p>
+<p>
+  Considering diffusion models' unique strengths, this is, simultaneously offering high generation quality and also mode coverage and diversity, as well as recent works on fast sampling, we foresee that they will be adopted widely in computer vision and graphics.
+  Unfortunately, diffusion models rely on fairly technical concepts, and as a result in many application domains the true potential of these models has not been unleashed yet, as the community working on them is still relatively small. <b>The primary goal of this tutorial is to make diffusion models accessible to a wide computer vision audience by providing an introductory short course.</b> This tutorial will build on simple concepts in generative learning and will provide fundamental knowledge to interested researchers and practitioners to start working in this exciting area.
+</p>
+<!-- <p>
+  Denoising diffusion models, also known as score-based generative models, have recently emerged as a powerful class of generative models. These models demonstrate astonishing results in high-fidelity image generation, even outperforming generative adversarial networks (GANs). Additionally, they feature strong mode coverage and sample diversity, indicated by high test set log-likelihood---in contrast to GANs, which are known for mode dropping when modeling complex distributions. This implies that denoising diffusion models are better suited for learning more complex and diverse data distributions and for faithfully representing also minority modes of the data, which reduces biases in the learnt model. Originating in thermodynamics from the statistical physics literature, diffusion models define a forward diffusion process that maps data to noise by gradually perturbing the input data. Data generation is achieved using a learnt, parametrized reverse process that performs iterative denoising, starting from pure random noise (see figure above). Although these models are relatively new, they have already found successful computer vision applications in image editing, image-to-image translation, super-resolution, point cloud generation and completion, image segmentation, and controllable generation.
+</p>
+<p>
+  Unfortunately, at their core, diffusion models rely on fairly technical concepts, requiring familiarity with energy-based models (EBMs), variational autoencoders (VAEs), continuous normalizing flows, and differential equations. As a result, in many application domains the true potential of these models has not been unleashed yet, as the community working on them is still relatively small. <b>The primary goal of this tutorial is to make diffusion models accessible to a wider computer vision audience by providing an introductory short course.</b> This tutorial will build on simple concepts in generative learning and will provide fundamental knowledge to interested researchers and practitioners to start working in this exciting area. To demonstrate how these models can be tailored to vision use cases, we will also review successful diffusion applications in computer vision.
+</p> -->
+<br id="speakers" /><br/>
+
+
+<div class="row">
+  <div class="col-xs-12">
+    <h2>Speakers</h2><br>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+
+
+  <div class="row">
+    <div class="col-xs-4" id="karsten">
+      <center>
+      <a href="https://karstenkreis.github.io/">
+        <img class="people-pic" src="./img/people/karsten.jpg" />
+      </a>
+      <div class="people-name">
+        <a href="https://karstenkreis.github.io/">Karsten Kreis</a>
+        <h6>NVIDIA</h6>
+      </div>
+    </center>
+    </div>
+    <div class="col-xs-4" id="ruiqi">
+      <center>
+      <a href="https://ruiqigao.github.io/">
+        <img class="people-pic" src="./img/people/ruiqi.png" />
+      </a>
+      <div class="people-name">
+        <a href="https://ruiqigao.github.io/">Ruiqi Gao</a>
+        <h6>Google Brain </h6>
+      </div>
+    </center>
+    </div>
+    <div class="col-xs-4" id="arash">
+      <center>
+      <a href="http://arashvahdat.com">
+        <img class="people-pic" src="./img/people/arash.jpg" />
+      </a>
+      <div class="people-name">
+         <a href="http://arashvahdat.com">Arash Vahdat</a>
+        <h6>NVIDIA</h6>
+      </div>
+    </center>
+    </div>
+  </div>
+
+  <div class="row">
+	<center>
+	    <img src="./img/nvidia_logo.png" style="width:30%" />
+	    <img src="./img/googleai_logo.png" style="width:30%" />
+	</center>
+  </div>
+
+<br id="talks" />
+<br>
+<br>
+
+<div class="row">
+  <div class="col-xs-12">
+     <h2>Schedule</h2>
+     <table class="table schedule" style="border:none !important;">
+      <thead class="thead-light">
+        <tr>
+        <th>Title</th>
+        <th>Speaker</th>
+        <th>Slides</th>
+        <th>Time</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+            <td>Introduction</td>
+            <td><a href="http://arashvahdat.com">Arash Vahdat</a></td>
+            <td>-</td>
+            <td>08:30 - 08:40</td>
+        </tr>
+
+        <tr>
+            <td>Denoising Diffusion Models</td>
+            <td><a href="http://arashvahdat.com">Arash Vahdat</a></td>
+            <td>-</td>
+            <td>08:40 - 09:15</td>
+        </tr>
+
+        <tr>
+            <td>Score-based Generative Modeling with Differential Equations</td>
+            <td><a href="https://karstenkreis.github.io/">Karsten Kreis</a></td>
+            <td>-</td>
+            <td>09:15 - 10:00</td>
+        </tr>
+        <tr>
+          <td><b>Coffee Break</b></td>
+          <td> </td>
+          <td> </td>
+          <td> </td>
+        </tr>
+
+        <tr>
+            <td>Accelerated Sampling</td>
+            <td><a href="https://ruiqigao.github.io/">Ruiqi Gao</a></td>
+            <td>-</td>
+            <td>10:30 - 11:05</td>
+        </tr>
+
+        <tr>
+            <td>Applications (1): Image Synthesis, Controllable and Semantic Generation, Text-to-Image</td>
+            <td><a href="https://ruiqigao.github.io/">Ruiqi Gao</a></td>
+            <td>-</td>
+            <td>11:05 - 11:20</td>
+        </tr>
+
+        <tr>
+            <td>Applications (2): Image Editing, Image-to-Image, Superresolution, Segmentation</td>
+            <td><a href="http://arashvahdat.com">Arash Vahdat</a></td>
+            <td>-</td>
+            <td>11:20 - 11:35</td>
+        </tr>
+
+        <tr>
+            <td>Applications (3): Discrete State Models, 3D Generation, Medical Imaging</td>
+            <td><a href="https://karstenkreis.github.io/">Karsten Kreis</a></td>
+            <td>-</td>
+            <td>11:35 - 11:50</td>
+        </tr>
+
+        <tr>
+            <td>Conclusions and Final Remarks</td>
+            <td><a href="http://arashvahdat.com">Arash Vahdat</a></td>
+            <td>-</td>
+            <td>11:50 - 12:00</td>
+        </tr>
+
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<br id="organizers" />
+<br>
+<br>
+<br>
+
+
+<div class="row">
+  <div class="col-xs-12">
+    <h2>About Us</h2>
+  </div>
+</div>
+
+<div class="row speaker" id="karsten">
+  <div class="col-sm-3 speaker-pic">
+    <a href="https://karstenkreis.github.io/">
+      <img class="people-pic" src="./img/people/karsten.jpg" />
+    </a>
+    <div class="people-name">
+      <a href="https://karstenkreis.github.io/">Karsten Kreis</a> <a href="https://twitter.com/karsten_kreis"><img src="./img/Twitter_Social_Icon_Rounded_Square_Color.png" /></a>
+      <h6>NVIDIA</h6>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <p class="speaker-bio">
+    Karsten Kreis is a senior research scientist at NVIDIA’s Toronto AI Lab. Prior to joining NVIDIA, he worked on deep generative modeling at D-Wave Systems and co-founded Variational AI, a startup utilizing generative models for drug discovery. Before switching to deep learning, Karsten did his M.Sc. in quantum information theory at the Max Planck Institute for the Science of Light and his Ph.D. in computational and statistical physics at the Max Planck Institute for Polymer Research. Currently, Karsten's research focuses on developing novel generative learning methods as well as on applying deep generative models on problems in areas such as computer vision, graphics and digital artistry.
+    </p>
+  </div>
+</div>
+
+
+
+
+<div class="row speaker" id="ruiqi">
+  <div class="col-sm-3 speaker-pic">
+    <a href="https://ruiqigao.github.io/">
+      <img class="people-pic" src="./img/people/ruiqi.png" />
+    </a>
+    <div class="people-name">
+      <a href="https://ruiqigao.github.io/">Ruiqi Gao</a> <a href="https://twitter.com/RuiqiGao"><img src="./img/Twitter_Social_Icon_Rounded_Square_Color.png" /></a>
+      <h6>Google Brain</h6>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <p class="speaker-bio">
+Ruiqi Gao is a research scientist at Google Brain. Her research interests are in statistical modeling and learning, with a focus on generative models and representation learning. She received her Ph.D. degree in statistics from the University of California, Los Angeles (UCLA) in 2021 working in the Center for Vision,
+Cognition, Learning, and Autonomy (VCLA), advised by Song-Chun Zhu and Ying Nian Wu. Her recent research themes include scalable training algorithms of deep generative models and applications in computer vision, natural language processing and neuroscience.
+    </p>
+  </div>
+</div>
+
+
+
+<div class="row speaker" id="arash">
+  <div class="col-sm-3 speaker-pic">
+    <a href="http://latentspace.cc/arash_vahdat/">
+      <img class="people-pic" src="./img/people/arash.jpg" />
+    </a>
+    <div class="people-name">
+      <a href="http://latentspace.cc/arash_vahdat/">Arash Vahdat</a> <a href="https://twitter.com/ArashVahdat"><img src="./img/Twitter_Social_Icon_Rounded_Square_Color.png" /></a>
+      <h6>NVIDIA</h6>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <p class="speaker-bio">
+    Arash Vahdat is a principal research scientist at NVIDIA research specializing in computer vision and machine learning. Before joining NVIDIA, he was a research scientist at D-Wave Systems where he worked on deep generative learning and weakly supervised learning. Prior to D-Wave, Arash was a research faculty member at Simon Fraser University (SFU), where he led research on deep video analysis and taught graduate-level courses on machine learning for big data. Arash obtained his Ph.D. and M.Sc. from SFU under Greg Mori’s supervision working on latent variable frameworks for visual analysis. His current areas of research include deep generative learning, weakly supervised learning, efficient neural networks, and probabilistic deep learning.
+    </p>
+  </div>
+</div>
+
+
+
+
+
+<br />
+</div></div>
+
+      </div>
+    </div>
+                <div class="section text-gray" id="footer">
+                <div class="container">
+
+                    <div class="row">
+                       <div class="col-sm-6">
+
+                            <!-- <p class="social">
+                                <a href="mailto:organizers@pirm2018.org" class="email" data-animate-hover="shake" data-animate="fadeInUp"><i class="fa fa-envelope"></i></a>
+                            </p> -->
+                        </div>
+                        <!-- /.6 -->  
+                        <div class="col-sm-6">
+                            <p><small>&copy; 2022 <a href="http://nvlabs.github.io" class="external">Arash Vahdat</a>.
+                            Template by <a href="https://nvlabs.github.io/eccv2020-limited-labels-data-tutorial/" class="external"> Shalini De Mello</a>.</small></p>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+  </body>
+</html>
