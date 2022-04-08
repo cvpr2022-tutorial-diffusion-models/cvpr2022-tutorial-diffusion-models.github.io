@@ -23,10 +23,12 @@
   <meta property="og:image:url" content="https://cvpr2022-tutorial-diffusion-models.github.io/img/thumbnail.png"/>
 
   <!--Twitter Card Stuff-->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:creator" content="@ArashVahdat">
   <meta name="twitter:title" content="Denoising Diffusion-based Generative Modeling: Foundations and Applications"/>
   <meta name="twitter:image" content="https://cvpr2022-tutorial-diffusion-models.github.io/img/thumbnail.png">
   <meta name="twitter:url" content="https://cvpr2022-tutorial-diffusion-models.github.io/"/>           
-  <meta name="twitter:description" content="Tutorial in Conjunction with CVPR 2022 ---"/>
+  <meta name="twitter:description" content="Tutorial on Diffusion Models in Conjunction with CVPR 2022"/>
 
   <!-- CSS  -->
   <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
@@ -104,12 +106,6 @@
   Considering diffusion models' unique strengths, this is, simultaneously offering high generation quality and also mode coverage and diversity, as well as recent works on fast sampling, we foresee that they will be adopted widely in computer vision and graphics.
   Unfortunately, diffusion models rely on fairly technical concepts, and as a result in many application domains the true potential of these models has not been unleashed yet, as the community working on them is still relatively small. <b>The primary goal of this tutorial is to make diffusion models accessible to a wide computer vision audience by providing an introductory short course.</b> This tutorial will build on simple concepts in generative learning and will provide fundamental knowledge to interested researchers and practitioners to start working in this exciting area.
 </p>
-<!-- <p>
-  Denoising diffusion models, also known as score-based generative models, have recently emerged as a powerful class of generative models. These models demonstrate astonishing results in high-fidelity image generation, even outperforming generative adversarial networks (GANs). Additionally, they feature strong mode coverage and sample diversity, indicated by high test set log-likelihood---in contrast to GANs, which are known for mode dropping when modeling complex distributions. This implies that denoising diffusion models are better suited for learning more complex and diverse data distributions and for faithfully representing also minority modes of the data, which reduces biases in the learnt model. Originating in thermodynamics from the statistical physics literature, diffusion models define a forward diffusion process that maps data to noise by gradually perturbing the input data. Data generation is achieved using a learnt, parametrized reverse process that performs iterative denoising, starting from pure random noise (see figure above). Although these models are relatively new, they have already found successful computer vision applications in image editing, image-to-image translation, super-resolution, point cloud generation and completion, image segmentation, and controllable generation.
-</p>
-<p>
-  Unfortunately, at their core, diffusion models rely on fairly technical concepts, requiring familiarity with energy-based models (EBMs), variational autoencoders (VAEs), continuous normalizing flows, and differential equations. As a result, in many application domains the true potential of these models has not been unleashed yet, as the community working on them is still relatively small. <b>The primary goal of this tutorial is to make diffusion models accessible to a wider computer vision audience by providing an introductory short course.</b> This tutorial will build on simple concepts in generative learning and will provide fundamental knowledge to interested researchers and practitioners to start working in this exciting area. To demonstrate how these models can be tailored to vision use cases, we will also review successful diffusion applications in computer vision.
-</p> -->
 <br id="speakers" /><br/>
 
 
